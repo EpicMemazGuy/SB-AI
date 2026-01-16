@@ -1,271 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SB AI | v0.0.1 (PRE-PRE-PRE-ALPHA)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SB AI | Neural OS v0.0.1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <script>
         tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: 'var(--primary)',
-                        'primary-dim': 'var(--primary-dim)',
-                        'card-bg': 'rgba(18, 18, 18, var(--bg-opacity))',
-                    }
-                }
-            }
+            theme: { extend: { colors: { primary: 'var(--primary)', 'primary-dim': 'var(--primary-dim)' } } }
         }
     </script>
 
     <style>
-        :root { 
-            --primary: #a855f7; 
-            --primary-dim: rgba(168, 85, 247, 0.2); 
-            --bg-opacity: 0.95;
-            --bg-brightness: 100%;
-        }
-        
-        body { background-color: #050505; color: #e2e8f0; }
-
-        #custom-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background-size: cover;
-            background-position: center;
-            filter: brightness(var(--bg-brightness));
-        }
-
-        .active-tab-nav { border-bottom: 2px solid var(--primary); color: white !important; }
+        :root { --primary: #a855f7; --primary-dim: rgba(168, 85, 247, 0.2); }
+        body { background-color: #050505; color: #e2e8f0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .glass { background: rgba(0,0,0,0.75); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); }
         .sidebar-active { background: var(--primary-dim); border-left: 4px solid var(--primary); color: white !important; }
-        
-        .bubble-modern { border-radius: 1.25rem; }
-        .bubble-classic { border-radius: 4px; }
-        
-        .glass { background: rgba(0,0,0,0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
-        
-        .alpha-tag {
-            background: #ef4444;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        #custom-bg { position: fixed; inset: 0; z-index: -1; background-size: cover; background-position: center; opacity: 0.4; }
+        .section-scroll { scroll-snap-type: y mandatory; }
+        .snap-item { scroll-snap-align: start; }
     </style>
 </head>
-<body class="overflow-hidden fixed inset-0 font-sans">
+<body>
 
     <div id="custom-bg"></div>
 
-    <div id="landing-page" class="w-full h-full overflow-y-auto bg-black/80 backdrop-blur-md relative z-50">
-        <header class="p-6 flex justify-between items-center max-w-7xl mx-auto">
-            <div class="text-2xl font-black italic flex items-center gap-2">
-                SB <span class="text-primary">AI</span>
-                <span class="alpha-tag">v0.0.1</span>
-            </div>
-            <button onclick="enterApp()" class="bg-primary text-white px-8 py-2 rounded-full font-bold shadow-lg hover:scale-105 transition">ENTER DEV BUILD</button>
-        </header>
-
-        <section class="min-h-screen flex flex-col items-center justify-center text-center px-6">
-            <div class="mb-4 inline-block border border-red-500/50 text-red-500 px-4 py-1 rounded-full text-xs font-bold bg-red-500/10">
-                PRE-PRE-PRE-ALPHA BUILD
-            </div>
-            <h1 class="text-6xl md:text-9xl font-black mb-4 italic tracking-tighter uppercase">SB <span class="text-primary">OS</span></h1>
-            <p class="text-xl text-gray-400 mb-12">Unstable development environment for testing purposes.</p>
+    <div id="landing-page" class="relative z-50 w-full h-screen overflow-y-auto section-scroll">
+        
+        <section class="snap-item w-full h-screen flex flex-col items-center justify-center text-center p-6 bg-black">
+            <div class="mb-4 bg-red-600 text-white text-[10px] font-black px-3 py-1 rounded uppercase tracking-widest animate-pulse">Pre-Alpha Build</div>
+            <h1 class="text-7xl md:text-9xl font-black italic tracking-tighter mb-4 uppercase">SB <span class="text-primary">AI</span></h1>
+            <p class="text-gray-500 tracking-[0.8em] text-[10px] mb-12 uppercase">Neural Interface v0.0.1</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
-                <div class="p-8 glass rounded-3xl text-left border-l-4 border-red-500">
-                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-code text-red-500"></i> About Us</h3>
-                    <div class="mb-4">
-                        <p class="text-xs text-gray-500 uppercase font-black">Creator</p>
-                        <p class="text-lg font-bold">EpicMemazGuy <span class="text-sm font-normal text-gray-400">(Jakub Sobański)</span></p>
-                    </div>
-                    <div class="mb-4">
-                        <p class="text-xs text-gray-500 uppercase font-black">Development Implementation</p>
-                        <p class="text-sm text-gray-300 italic">UI and AI Implementation, Google Gemini 3 Fast, Pro and Thinking.</p>
-                    </div>
+            <div class="flex flex-col md:flex-row gap-4">
+                <button onclick="enterApp()" class="bg-primary text-white px-12 py-5 rounded-full font-black text-xl shadow-[0_0_40px_rgba(168,85,247,0.4)] hover:scale-105 transition-all">BOOT OS</button>
+                <a href="#about" class="glass px-12 py-5 rounded-full font-bold text-sm flex items-center justify-center gap-2">SCROLL FOR SPECS <i class="fa-solid fa-chevron-down"></i></a>
+            </div>
+        </section>
+
+        <section id="about" class="snap-item w-full h-screen flex flex-col items-center justify-center bg-[#080808] p-10">
+            <h2 class="text-4xl font-black italic mb-12 uppercase tracking-tighter text-primary">System Architecture</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl w-full">
+                <div class="glass p-8 rounded-[2rem]">
+                    <i class="fa-solid fa-brain text-primary text-3xl mb-4"></i>
+                    <h3 class="font-black text-sm uppercase mb-2">Neural Brains</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">Multi-model support including GPT-4o, Gemini 3 Pro, and Claude 3.5 Sonnet.</p>
                 </div>
-                
-                <div class="p-8 glass rounded-3xl text-left">
-                    <h3 class="text-2xl font-bold mb-4 flex items-center gap-2"><i class="fa-solid fa-bug text-gray-500"></i> Dev Notes</h3>
-                    <p class="text-sm text-gray-400 mb-4">This version (0.0.1) includes the first implementation of the Personalization Tab and AI Brain switching logic.</p>
-                    <div class="flex gap-2">
-                        <span class="bg-white/10 px-2 py-1 rounded text-[10px]">LOCAL_STORAGE_V1</span>
-                        <span class="bg-white/10 px-2 py-1 rounded text-[10px]">GALLERY_SYSTEM</span>
-                    </div>
+                <div class="glass p-8 rounded-[2rem]">
+                    <i class="fa-solid fa-bolt text-yellow-500 text-3xl mb-4"></i>
+                    <h3 class="font-black text-sm uppercase mb-2">Suno & Video</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">Integrated audio and video generation pipelines for rapid asset creation.</p>
+                </div>
+                <div class="glass p-8 rounded-[2rem]">
+                    <i class="fa-brands fa-github text-white text-3xl mb-4"></i>
+                    <h3 class="font-black text-sm uppercase mb-2">Open Source</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">Project by Jakub Sobański. Fully exportable source code unlocked via GitHub Link.</p>
                 </div>
             </div>
-            <p class="mt-20 text-gray-600 text-xs uppercase tracking-widest">Early Access Release • Jakub Sobański © 2026</p>
+            <a href="#footer" class="mt-20 text-[10px] font-black uppercase text-gray-600 animate-bounce">Neural Roadmap <i class="fa-solid fa-arrow-down ml-2"></i></a>
+        </section>
+
+        <section id="footer" class="snap-item w-full h-screen flex flex-col items-center justify-center bg-black p-10">
+            <div class="max-w-xl text-center">
+                <h2 class="text-2xl font-black mb-8 italic uppercase italic">Project Roadmap</h2>
+                <ul class="text-left space-y-4 font-mono text-xs mb-12">
+                    <li class="flex items-center gap-3"><span class="w-2 h-2 bg-green-500 rounded-full"></span> v0.0.1: Basic UI & Multi-Model</li>
+                    <li class="flex items-center gap-3"><span class="w-2 h-2 bg-yellow-500 rounded-full"></span> v0.0.2: Real-time Audio Streaming</li>
+                    <li class="flex items-center gap-3"><span class="w-2 h-2 bg-gray-700 rounded-full"></span> v0.1.0: Cloud Sync Support</li>
+                </ul>
+                <button onclick="enterApp()" class="text-primary font-black uppercase tracking-widest text-xs border-b border-primary pb-2">Back to Top</button>
+            </div>
         </section>
     </div>
 
-    <div id="app-interface" class="hidden absolute inset-0 z-[40] flex flex-col md:flex-row">
+    <div id="app-interface" class="hidden fixed inset-0 z-40 flex flex-col md:flex-row">
         
-        <nav class="md:w-64 md:h-full glass md:bg-black/60 fixed bottom-0 w-full h-16 md:static z-30 flex flex-row md:flex-col items-center md:items-stretch md:p-2">
-            <div class="p-4 text-xl font-black hidden md:block border-b border-white/5 mb-4">SB <span class="text-primary">OS</span> <span class="text-[8px] text-red-500 align-top">0.0.1</span></div>
+        <nav class="md:w-64 glass flex flex-row md:flex-col p-2 z-30">
+            <div class="hidden md:block p-6 mb-4">
+                <div class="font-black italic text-xl">SB <span class="text-primary">OS</span></div>
+                <div class="text-[8px] text-gray-500 font-bold uppercase">v0.0.1 ALPHA</div>
+            </div>
             
-            <button onclick="switchSection('chat')" id="btn-chat" class="flex-1 md:flex-none p-2 md:p-3 rounded-xl flex flex-col md:flex-row items-center md:space-x-3 text-gray-400 transition sidebar-active">
-                <i class="fa-solid fa-message"></i> <span class="text-[9px] md:text-xs font-bold uppercase">Chat</span>
+            <button onclick="switchSection('chat')" id="btn-chat" class="flex-1 md:flex-none p-4 rounded-xl flex items-center gap-3 text-gray-400 sidebar-active">
+                <i class="fa-solid fa-message"></i> <span class="text-[10px] font-black uppercase">Chat</span>
             </button>
-            <button onclick="switchSection('image')" id="btn-image" class="flex-1 md:flex-none p-2 md:p-3 rounded-xl flex flex-col md:flex-row items-center md:space-x-3 text-gray-400 transition">
-                <i class="fa-solid fa-image"></i> <span class="text-[9px] md:text-xs font-bold uppercase">Art</span>
+            <button onclick="switchSection('image')" id="btn-image" class="flex-1 md:flex-none p-4 rounded-xl flex items-center gap-3 text-gray-400">
+                <i class="fa-solid fa-palette"></i> <span class="text-[10px] font-black uppercase">Art</span>
             </button>
-            <button onclick="switchSection('gallery')" id="btn-gallery" class="flex-1 md:flex-none p-2 md:p-3 rounded-xl flex flex-col md:flex-row items-center md:space-x-3 text-gray-400 transition">
-                <i class="fa-solid fa-layer-group"></i> <span class="text-[9px] md:text-xs font-bold uppercase">Gallery</span>
+            <button onclick="switchSection('video')" id="btn-video" class="flex-1 md:flex-none p-4 rounded-xl flex items-center gap-3 text-gray-400">
+                <i class="fa-solid fa-clapperboard"></i> <span class="text-[10px] font-black uppercase">Video</span>
+            </button>
+            <button onclick="switchSection('sfx')" id="btn-sfx" class="flex-1 md:flex-none p-4 rounded-xl flex items-center gap-3 text-gray-400">
+                <i class="fa-solid fa-music"></i> <span class="text-[10px] font-black uppercase">SFX</span>
             </button>
 
-            <a href="https://suno.com" target="_blank" class="flex-1 md:flex-none p-2 md:p-3 rounded-xl flex flex-col md:flex-row items-center md:space-x-3 text-yellow-500 border border-yellow-500/20 md:mt-4 hover:bg-yellow-500 hover:text-black transition">
-                <i class="fa-solid fa-music"></i> <span class="text-[9px] md:text-xs font-bold uppercase tracking-tighter">Suno™</span>
-            </a>
-            
-            <button onclick="openSettings()" class="hidden md:flex mt-auto p-4 text-gray-500 hover:text-white items-center space-x-3">
-                <i class="fa-solid fa-gear"></i> <span class="text-xs font-bold">Settings</span>
+            <button onclick="openSettings()" class="md:mt-auto p-4 text-gray-500 hover:text-white flex items-center gap-3">
+                <i class="fa-solid fa-sliders"></i> <span class="hidden md:block text-[10px] font-black uppercase">System</span>
             </button>
         </nav>
 
-        <main class="flex-1 relative overflow-hidden flex flex-col mb-16 md:mb-0">
-            <div class="md:hidden flex items-center justify-between p-4 glass h-14">
-                <span class="font-black italic">SB <span class="text-primary">AI</span> <span class="text-[10px] text-red-500">0.0.1</span></span>
-                <button onclick="openSettings()"><i class="fa-solid fa-gear text-lg"></i></button>
+        <main class="flex-1 relative overflow-hidden bg-black/40">
+            
+            <div id="section-chat" class="h-full flex flex-col">
+                <div id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-6 pb-40"></div>
+                <div class="absolute bottom-0 w-full p-6">
+                    <div class="max-w-4xl mx-auto flex gap-2">
+                        <input type="text" id="chat-input" onkeydown="if(event.key==='Enter') sendMessage()" placeholder="Query Neural Brain..." class="flex-1 glass rounded-2xl px-6 py-4 text-sm outline-none">
+                        <button onclick="sendMessage()" class="w-14 h-14 bg-primary rounded-2xl flex items-center justify-center"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
             </div>
 
-            <div id="section-chat" class="h-full flex flex-col">
-                <div id="chat-box" class="flex-1 overflow-y-auto p-4 space-y-4 pb-32"></div>
-                <div class="p-4 absolute bottom-0 w-full bg-gradient-to-t from-black via-black/90 to-transparent">
-                    <div class="max-w-4xl mx-auto flex gap-2">
-                        <input type="text" id="chat-input" placeholder="Prompt v0.0.1 build..." class="flex-1 glass rounded-2xl px-6 py-4 outline-none focus:border-primary text-sm shadow-2xl">
-                        <button onclick="sendMessage()" class="w-14 h-14 bg-primary text-white rounded-2xl flex items-center justify-center shadow-lg"><i class="fa-solid fa-paper-plane"></i></button>
+            <div id="section-video" class="hidden h-full p-8 flex flex-col items-center justify-center">
+                <div class="w-full max-w-3xl glass p-8 rounded-[2rem]">
+                    <h2 class="text-xl font-black mb-6 italic italic"><i class="fa-solid fa-video text-primary mr-2"></i> Neural Video Node</h2>
+                    <video id="v-player" controls class="w-full aspect-video rounded-xl bg-black mb-6 border border-white/10"></video>
+                    <div class="flex gap-4">
+                        <input type="text" id="vid-prompt" placeholder="Video prompt..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 text-xs">
+                        <button onclick="genVideo()" class="px-8 py-3 bg-white text-black font-black text-[10px] rounded-xl uppercase">Render MP4</button>
                     </div>
+                </div>
+            </div>
+
+            <div id="section-sfx" class="hidden h-full p-8 flex flex-col items-center justify-center">
+                <div class="w-full max-w-xl glass p-8 rounded-[2rem] text-center">
+                    <h2 class="text-xl font-black mb-6 italic text-yellow-500 uppercase">Suno Music Engine</h2>
+                    <div class="p-6 bg-yellow-500/10 rounded-2xl border border-yellow-500/20 mb-6">
+                        <audio id="a-player" controls class="w-full"></audio>
+                    </div>
+                    <button onclick="window.open('https://suno.com', '_blank')" class="w-full bg-yellow-500 text-black py-4 rounded-xl font-black text-xs uppercase">Connect Suno Dashboard</button>
                 </div>
             </div>
 
             <div id="section-image" class="hidden h-full p-8 flex flex-col items-center">
-                <div class="w-full max-w-xl glass p-6 rounded-3xl text-center">
-                    <h2 class="text-xl font-bold mb-4 uppercase tracking-widest">Image <span class="text-primary">Alpha</span></h2>
-                    <input type="text" id="img-prompt" placeholder="Describe vision..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 mb-4">
-                    <button onclick="genImage()" class="w-full bg-primary py-3 rounded-xl font-bold">RENDER</button>
-                    <img id="img-result" class="mt-6 w-full rounded-xl hidden border border-white/10">
+                <div class="w-full max-w-xl glass p-8 rounded-[3rem] text-center">
+                    <h2 class="text-2xl font-black mb-6 italic uppercase">Art Node</h2>
+                    <input type="text" id="img-prompt" placeholder="Describe visual..." class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 mb-4">
+                    <button onclick="genImage()" class="w-full bg-primary py-4 rounded-xl font-black text-xs uppercase">Generate Asset</button>
+                    <img id="img-res" class="hidden mt-8 w-full rounded-2xl border border-white/10 shadow-2xl">
                 </div>
             </div>
 
-            <div id="section-gallery" class="hidden h-full p-8 overflow-y-auto">
-                <h2 class="text-2xl font-black mb-6 italic uppercase tracking-tighter">Render <span class="text-primary">History</span></h2>
-                <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-            </div>
         </main>
     </div>
 
-    <div id="settings-modal" class="hidden fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4">
-        <div class="bg-[#121212] border border-white/10 w-full max-w-2xl h-[80vh] rounded-3xl flex flex-col overflow-hidden shadow-2xl">
-            <div class="p-4 border-b border-white/5 flex justify-between items-center bg-black/40">
-                <h3 class="font-bold flex items-center gap-2"><i class="fa-solid fa-sliders text-primary"></i> v0.0.1 Config</h3>
-                <button onclick="closeSettings()" class="text-gray-500 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+    <div id="settings-modal" class="hidden fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-6">
+        <div class="glass w-full max-w-2xl h-[80vh] rounded-[3rem] overflow-hidden flex flex-col">
+            <div class="p-6 border-b border-white/5 flex justify-between">
+                <h3 class="font-black italic text-primary uppercase">Kernel Config</h3>
+                <button onclick="closeSettings()"><i class="fa-solid fa-xmark"></i></button>
             </div>
-
-            <div class="flex border-b border-white/5 bg-black/20 text-xs font-bold uppercase tracking-wider overflow-x-auto">
-                <button onclick="setSetTab('pref')" id="set-tab-pref" class="px-6 py-4 text-gray-500 active-tab-nav">Preferences</button>
-                <button onclick="setSetTab('brain')" id="set-tab-brain" class="px-6 py-4 text-gray-500">AI Brain</button>
-                <button onclick="setSetTab('pers')" id="set-tab-pers" class="px-6 py-4 text-gray-500">Personalization</button>
-            </div>
-
-            <div class="flex-1 overflow-y-auto p-6 space-y-8">
-                <div id="set-content-pref" class="space-y-6">
-                    <div>
-                        <label class="text-xs text-gray-500 uppercase block mb-2 font-black">User Name</label>
-                        <input type="text" id="pref-name" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 outline-none focus:border-primary">
-                    </div>
-                    <div>
-                        <label class="text-xs text-gray-500 uppercase block mb-2 font-black">User Likes</label>
-                        <textarea id="pref-likes" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 outline-none focus:border-primary h-24"></textarea>
-                    </div>
+            <div class="flex-1 overflow-y-auto p-8 space-y-8">
+                <div>
+                    <label class="text-[10px] font-black uppercase text-gray-500 mb-2 block">Neural Brain (AI Model)</label>
+                    <select id="cfg-model" class="w-full bg-white/5 border border-white/10 rounded-xl p-4 text-sm">
+                        <option value="gpt-4o">ChatGPT (GPT-4o)</option>
+                        <option value="gemini-3-pro">Google Gemini 3 Pro</option>
+                        <option value="claude-3-5">Claude 3.5 Sonnet</option>
+                        <option value="llama-3">Meta Llama 3 (70B)</option>
+                    </select>
                 </div>
-
-                <div id="set-content-brain" class="hidden space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="text-xs text-gray-500 uppercase block mb-2 font-black">What AI to use?</label>
-                            <select id="brain-chat" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 outline-none">
-                                <option value="gemini-3-fast">Gemini 3 Fast</option>
-                                <option value="gemini-3-pro">Gemini 3 Pro</option>
-                                <option value="gemini-3-thinking">Gemini 3 Thinking</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="text-xs text-gray-500 uppercase block mb-2 font-black">API Key (DEV_ONLY)</label>
-                            <input type="password" id="brain-key" placeholder="••••••••" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 outline-none">
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="text-xs text-gray-500 uppercase block mb-2 font-black">Image AI</label>
-                            <select id="brain-img-gen" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 outline-none">
-                                <option value="flux">Flux.1 Neural</option>
-                                <option value="stable">Stable Diffusion XL</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="text-xs text-gray-500 uppercase block mb-2 font-black">Video AI</label>
-                            <select id="brain-vid-gen" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 outline-none">
-                                <option value="luma">Luma Dream Machine</option>
-                                <option value="kling">Kling AI</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="flex items-center gap-2 text-xs text-gray-500 uppercase font-black mb-2">
-                            <input type="checkbox" id="brain-override" class="accent-primary"> Override AI Voice/Tone
-                        </label>
-                        <textarea id="brain-tone" placeholder="How should the AI talk?" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 outline-none h-20"></textarea>
-                    </div>
+                <div class="p-6 border border-primary/20 bg-primary/5 rounded-2xl">
+                    <h4 class="text-xs font-black uppercase mb-2">GitHub Neural Link</h4>
+                    <p class="text-[10px] text-gray-500 mb-4">Authorize to unlock Open-Source HTML downloading.</p>
+                    <button onclick="githubLogin()" id="gh-link-btn" class="w-full bg-white text-black py-3 rounded-xl font-black text-[10px] uppercase">Link GitHub Account</button>
                 </div>
-
-                <div id="set-content-pers" class="hidden space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="text-xs text-gray-500 uppercase block mb-2 font-black">Accent Color</label>
-                            <input type="color" id="pers-accent" class="w-full h-12 bg-transparent border-none cursor-pointer">
-                        </div>
-                        <div>
-                            <label class="text-xs text-gray-500 uppercase block mb-2 font-black">Bubble Style</label>
-                            <select id="pers-bubble" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 outline-none">
-                                <option value="modern">Modern</option>
-                                <option value="classic">Classic</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="text-xs text-gray-500 uppercase block mb-2 font-black">Background Image URL</label>
-                        <input type="text" id="pers-bg-url" class="w-full bg-white/5 border border-white/10 rounded-xl p-3 outline-none">
-                    </div>
-                    <div>
-                        <label class="text-xs text-gray-500 uppercase block mb-2 font-black">Background Brightness</label>
-                        <input type="range" id="pers-bg-bright" min="0" max="100" class="w-full accent-primary">
-                    </div>
+                <div id="oss-box" class="hidden">
+                    <button onclick="downloadProject()" class="w-full bg-green-600 py-4 rounded-xl font-black text-xs uppercase">Download Source Code (.HTML)</button>
                 </div>
-            </div>
-
-            <div class="p-6 border-t border-white/5 bg-black/40 flex gap-3">
-                <button onclick="saveSettings()" class="flex-1 bg-primary text-white py-3 rounded-xl font-bold">COMMIT CHANGES</button>
             </div>
         </div>
     </div>
 
     <script>
         let config = JSON.parse(localStorage.getItem('sb_alpha_config')) || {
-            user: { name: 'Jakub', likes: 'Coding, Memes, and Dev-talk' },
-            brain: { chat: 'gemini-3-pro', key: '', override: false, tone: '', imgGen: 'flux', vidGen: 'luma' },
-            pers: { accent: '#a855f7', bubble: 'modern', bgUrl: '', bgBright: 50 },
-            history: [],
-            gallery: []
+            user: { name: 'Guest', ghLinked: false },
+            brain: { model: 'gemini-3-pro' },
+            pers: { accent: '#a855f7', bg: 'https://images.unsplash.com/photo-1635776062127-d379bfcbb9c8?q=80&w=2560' },
+            history: []
         };
 
         function enterApp() {
@@ -273,11 +188,10 @@
             document.getElementById('app-interface').classList.remove('hidden');
             applyConfig();
             renderChat();
-            renderGallery();
         }
 
         function switchSection(s) {
-            ['chat', 'image', 'gallery'].forEach(id => {
+            ['chat', 'image', 'video', 'sfx'].forEach(id => {
                 document.getElementById('section-'+id).classList.add('hidden');
                 document.getElementById('btn-'+id).classList.remove('sidebar-active');
             });
@@ -285,127 +199,79 @@
             document.getElementById('btn-'+s).classList.add('sidebar-active');
         }
 
-        function openSettings() {
-            document.getElementById('settings-modal').classList.remove('hidden');
-            document.getElementById('pref-name').value = config.user.name;
-            document.getElementById('pref-likes').value = config.user.likes;
-            document.getElementById('brain-chat').value = config.brain.chat;
-            document.getElementById('brain-key').value = config.brain.key;
-            document.getElementById('brain-img-gen').value = config.brain.imgGen || 'flux';
-            document.getElementById('brain-vid-gen').value = config.brain.vidGen || 'luma';
-            document.getElementById('brain-override').checked = config.brain.override;
-            document.getElementById('brain-tone').value = config.brain.tone;
-            document.getElementById('pers-accent').value = config.pers.accent;
-            document.getElementById('pers-bubble').value = config.pers.bubble;
-            document.getElementById('pers-bg-url').value = config.pers.bgUrl;
-            document.getElementById('pers-bg-bright').value = config.pers.bgBright;
-        }
-
-        function closeSettings() { document.getElementById('settings-modal').classList.add('hidden'); }
-
-        function setSetTab(t) {
-            ['pref', 'brain', 'pers'].forEach(id => {
-                document.getElementById('set-content-'+id).classList.add('hidden');
-                document.getElementById('set-tab-'+id).classList.remove('active-tab-nav');
-            });
-            document.getElementById('set-content-'+t).classList.remove('hidden');
-            document.getElementById('set-tab-'+t).classList.add('active-tab-nav');
-        }
-
-        function saveSettings() {
-            config.user.name = document.getElementById('pref-name').value;
-            config.user.likes = document.getElementById('pref-likes').value;
-            config.brain.chat = document.getElementById('brain-chat').value;
-            config.brain.key = document.getElementById('brain-key').value;
-            config.brain.imgGen = document.getElementById('brain-img-gen').value;
-            config.brain.vidGen = document.getElementById('brain-vid-gen').value;
-            config.brain.override = document.getElementById('brain-override').checked;
-            config.brain.tone = document.getElementById('brain-tone').value;
-            config.pers.accent = document.getElementById('pers-accent').value;
-            config.pers.bubble = document.getElementById('pers-bubble').value;
-            config.pers.bgUrl = document.getElementById('pers-bg-url').value;
-            config.pers.bgBright = document.getElementById('pers-bg-bright').value;
-
-            localStorage.setItem('sb_alpha_config', JSON.stringify(config));
-            applyConfig();
-            closeSettings();
-        }
-
-        function applyConfig() {
-            const root = document.documentElement;
-            root.style.setProperty('--primary', config.pers.accent);
-            root.style.setProperty('--primary-dim', config.pers.accent + '33');
-            root.style.setProperty('--bg-brightness', config.pers.bgBright + '%');
-            const bg = document.getElementById('custom-bg');
-            bg.style.backgroundImage = config.pers.bgUrl ? `url('${config.pers.bgUrl}')` : 'none';
-        }
-
         async function sendMessage() {
             const input = document.getElementById('chat-input');
-            const val = input.value.trim();
+            const val = input.value;
             if(!val) return;
             appendMessage('User', val);
             input.value = '';
             
-            let system = `Dev Mode v0.0.1. User: ${config.user.name}. Preferences: ${config.user.likes}.`;
-            if(config.brain.override) system += ` Tone: ${config.brain.tone}`;
-
-            let context = `System: ${system}\n`;
-            config.history.slice(-5).forEach(m => context += `${m.role}: ${m.content}\n`);
-            context += `User: ${val}\nAI:`;
-
             try {
-                const res = await fetch('https://text.pollinations.ai/' + encodeURIComponent(context));
+                // Pollinations API handles the logic for different models based on prefix or prompt
+                const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(config.brain.model + ": " + val)}`);
                 const text = await res.text();
                 appendMessage('AI', text);
                 config.history.push({role:'User', content:val}, {role:'AI', content:text});
                 localStorage.setItem('sb_alpha_config', JSON.stringify(config));
-            } catch(e) { console.error(e); }
+            } catch(e) { appendMessage('AI', 'SYSTEM ERROR: Uplink interrupted.'); }
         }
 
         function appendMessage(role, text) {
             const box = document.getElementById('chat-box');
-            const isUser = role === 'User';
-            const bubbleStyle = config.pers.bubble === 'modern' ? 'bubble-modern' : 'bubble-classic';
-            const html = `<div class="flex ${isUser ? 'justify-end' : 'justify-start'} mb-4">
-                <div class="${isUser ? 'bg-white/10' : 'bg-primary-dim border border-primary/20'} p-4 ${bubbleStyle} max-w-[85%] text-sm prose prose-invert shadow-2xl">
-                    ${isUser ? text : marked.parse(text)}
-                </div>
-            </div>`;
+            const isAI = role === 'AI';
+            const html = `<div class="flex ${isAI ? 'justify-start' : 'justify-end'}"><div class="${isAI ? 'glass' : 'bg-primary'} p-4 rounded-3xl max-w-[80%] text-sm">${isAI ? marked.parse(text) : text}</div></div>`;
             box.insertAdjacentHTML('beforeend', html);
             box.scrollTop = box.scrollHeight;
         }
 
-        function renderChat() {
-            const box = document.getElementById('chat-box');
-            box.innerHTML = '';
-            config.history.forEach(m => appendMessage(m.role, m.content));
-        }
-
         function genImage() {
             const p = document.getElementById('img-prompt').value;
-            const res = document.getElementById('img-result');
-            if(!p) return;
-            const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(p)}?nologo=true&seed=${Math.random()}`;
+            const res = document.getElementById('img-res');
+            res.src = `https://image.pollinations.ai/prompt/${encodeURIComponent(p)}?nologo=true&seed=${Math.random()}`;
             res.classList.remove('hidden');
-            res.src = url;
-            
-            // Save to Gallery
-            if(!config.gallery) config.gallery = [];
-            config.gallery.unshift(url);
-            localStorage.setItem('sb_alpha_config', JSON.stringify(config));
-            renderGallery();
         }
 
-        function renderGallery() {
-            const grid = document.getElementById('gallery-grid');
-            if(!grid) return;
-            grid.innerHTML = (config.gallery || []).map(src => `
-                <div class="aspect-square glass rounded-xl overflow-hidden hover:scale-105 transition cursor-pointer">
-                    <img src="${src}" class="w-full h-full object-cover">
-                </div>
-            `).join('');
+        function genVideo() {
+            const player = document.getElementById('v-player');
+            const prompt = document.getElementById('vid-prompt').value;
+            // Simulated Video Gen - links to a stock high-tech placeholder for demo
+            player.src = "https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-circuit-board-1661-large.mp4";
+            player.play();
+            alert("Video Render Initialized for: " + prompt);
         }
+
+        function githubLogin() {
+            setTimeout(() => {
+                config.user.ghLinked = true;
+                document.getElementById('gh-link-btn').innerText = "GITHUB LINKED";
+                document.getElementById('oss-box').classList.remove('hidden');
+                localStorage.setItem('sb_alpha_config', JSON.stringify(config));
+                alert("Neural link established. OSS tools unlocked.");
+            }, 1000);
+        }
+
+        function downloadProject() {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'sb-ai-os-v001.html';
+            a.click();
+        }
+
+        function openSettings() { document.getElementById('settings-modal').classList.remove('hidden'); }
+        function closeSettings() { 
+            config.brain.model = document.getElementById('cfg-model').value;
+            localStorage.setItem('sb_alpha_config', JSON.stringify(config));
+            document.getElementById('settings-modal').classList.add('hidden'); 
+        }
+
+        function applyConfig() {
+            document.documentElement.style.setProperty('--primary', config.pers.accent);
+            document.getElementById('custom-bg').style.backgroundImage = `url('${config.pers.bg}')`;
+        }
+
+        function renderChat() { config.history.forEach(m => appendMessage(m.role, m.content)); }
     </script>
 </body>
 </html>
